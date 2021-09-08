@@ -1,3 +1,5 @@
+const calcdisplay = document.querySelector("input");
+
 function add(num1, num2){
     return num1 + num2;
 };
@@ -20,6 +22,10 @@ function operate(ope,num1,num2){
     }
 }
 
-function displayNum(val){
-    document.querySelector("input").value = parseInt(val)
+function input(e){
+    calcdisplay.value = calcdisplay.value + e.value
+}
+
+function clear(val){
+     clearBtn.value = val
 }
