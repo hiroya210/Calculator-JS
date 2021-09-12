@@ -3,26 +3,62 @@ const calcButton = document.querySelector("#btn");
 let arr = [];
 let total = 0;
 let operation = "";
-console.log(calcDisplay.value)
+let lastPress = "";
+let arr3 = [];
 
+console.log(typeof calcDisplay.value[0])
 
 function numButton(e){
+    if(calcDisplay.value[0] == "0"){
+        calcDisplay.value = calcDisplay.value.replace("0","")
+    }
     calcDisplay.value = calcDisplay.value + e
-    if (calcDisplay.value.length === 20){
+    if (lastPress == opPress || lastPress == operate){
+        calcDisplay.value = "";
+        lastPress = numButton;
+        calcDisplay.value = calcDisplay.value + e;
+    }
+    if (calcDisplay.value.length == 11){
      let arr = calcDisplay.value.split("");
        arr.pop();
        calcDisplay.value = arr.join("");
        calcDisplay.value;
     }
+    if(calcDisplay.value.length == 4){
+        calcDisplay.style.fontSize = "3.5em";
+        arr3 = calcDisplay.value.split("");
+        arr3.splice(1,0,",");
+        calcDisplay.value =  arr3.join("");
+    }
+    if(calcDisplay.value.length == 8){
+        calcDisplay.style.fontSize = "3em";
+        arr3 = calcDisplay.value.split("");
+        arr3.splice(5,0,",")
+        calcDisplay.value = arr3.join("");
+        
+    }
+    if(calcDisplay.value.length == 11){
+        calcDisplay.style.fontSize = "2.5em";
+        calcDisplay.value = calcDisplay.value + ","
+    }
  }
+ 
 
 
 
 function opPress(ope){
+        lastPress = opPress;
         operation = ope;
         num1 = calcDisplay.value;
+        if(operation == "posneg"){
+            num1 = (-1)*num1
+        calcDisplay.value = num1
+        }
+        if(operation == "percent"){
+            num1 = num1/100;
+        calcDisplay.value = num1
+        }
         arr[0] = num1;
-        calcDisplay.value = "";
         console.log(arr)
     }
 
@@ -31,9 +67,10 @@ function opPress(ope){
     
 function operate(){
     num2 = calcDisplay.value;
+    lastPress = operate;
     arr[1] = (num2)
     let arr2 = arr.map(function toInt(z){
-        return parseFloat(z);
+        return parseFloat(z.replaceAll(",",""));
     })
     console.log(arr2)
     if(operation == "+"){
@@ -56,16 +93,14 @@ function operate(){
                 return a / b
         })
     }
-    
-    
     arr2[1] = total;
-    console.log(total)
-    calcDisplay.value = total;
-    
+    total.toString();
+    calcDisplay.value = total
 }
 
 function clearDisplay(){
+    calcDisplay.style.fontSize = "4em";
+    lastPress = "";
     arr = []
-    calcDisplay.value = ""
+    calcDisplay.value = "0"
 }
-
