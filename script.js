@@ -6,7 +6,7 @@ let operation = "";
 let lastPress = "";
 let arr3 = [];
 
-console.log(typeof calcDisplay.value[0])
+
 
 function numButton(e){
     if(calcDisplay.value[0] == "0"){
@@ -18,30 +18,19 @@ function numButton(e){
         lastPress = numButton;
         calcDisplay.value = calcDisplay.value + e;
     }
-    if (calcDisplay.value.length == 11){
+    if (calcDisplay.value.length == 10){
      let arr = calcDisplay.value.split("");
        arr.pop();
        calcDisplay.value = arr.join("");
        calcDisplay.value;
     }
-    if(calcDisplay.value.length == 4){
-        calcDisplay.style.fontSize = "3.5em";
-        arr3 = calcDisplay.value.split("");
-        arr3.splice(1,0,",");
-        calcDisplay.value =  arr3.join("");
-    }
-    if(calcDisplay.value.length == 8){
+    if(calcDisplay.value.length > 9){
         calcDisplay.style.fontSize = "3em";
-        arr3 = calcDisplay.value.split("");
-        arr3.splice(5,0,",")
-        calcDisplay.value = arr3.join("");
-        
     }
-    if(calcDisplay.value.length == 11){
-        calcDisplay.style.fontSize = "2.5em";
-        calcDisplay.value = calcDisplay.value + ","
-    }
- }
+    
+
+}
+ 
  
 
 
@@ -99,7 +88,7 @@ function operate(){
 }
 
 function clearDisplay(){
-    calcDisplay.style.fontSize = "4em";
+    calcDisplay.style.fontSize = "3.3em";
     lastPress = "";
     arr = []
     calcDisplay.value = "0"
